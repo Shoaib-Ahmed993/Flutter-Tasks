@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart' ;
 
 class Screen extends StatefulWidget {
@@ -10,6 +12,8 @@ class _ScreenState extends State<Screen> {
 
   dynamic images = ["assets/note20 ultra.jpg","assets/macbook air.jpg","assets/macbook pro.jpg","assets/backlit keyboard.jpg","assets/gaming pc.jpg","assets/iphone12.jpg","assets/mercedes.jpg","assets/mutton.jpg","assets/royalfield.jpg","assets/roadster.jpg"];
   var imagesNames = ["Note 20 Ultra", "Macbook Air", "Macbook Pro", "Backlit Keyboard", "Gaming PC", "Iphone 12", "Mercedes", "Mutton", "Royal Field", "Roadster"];
+  var items = ["Clothes", "Electric", "Households", "Appliances", "Others"];
+  var itemsQuantity = ["5 items", "20 items", "9 items", "5 items", "15 items"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,11 +68,52 @@ class _ScreenState extends State<Screen> {
                   child: Image.asset(images[index]),
                 );
               },
-
             )
-              
             ),
-            
+          ),
+
+          Container(
+            child: Column(
+              children: [
+                Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('More Categories', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                ],
+              ),
+            ),
+
+
+            Container(
+            height: 100,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: 
+                 List.generate(items.length, (index) {
+                  return Column(
+                  // margin: EdgeInsets.all(20),
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // width: 150,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.store),
+                        Text(items[index]),
+                        Text(itemsQuantity[index],)
+                        
+                      ],
+                    )
+                  ]
+                );
+
+              },
+            ),
+            ),
+          ),
+            ],
+            )
           ),
 
 
@@ -95,7 +140,32 @@ class _ScreenState extends State<Screen> {
 
         ],
       ),
+
     ),
+
+    bottomNavigationBar: BottomAppBar(
+      child: Container(
+        height: 60,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Icon(Icons.home,color: Colors.purple,),
+            Icon(Icons.favorite,color: Colors.grey[600],),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 15),
+              child: FloatingActionButton(
+                onPressed: (){},
+                child: Icon(Icons.search_sharp),
+                backgroundColor: Colors.purple,
+                
+              ),
+            ),
+            Icon(Icons.add_shopping_cart,color: Colors.grey[600],),
+            Icon(Icons.person,color: Colors.grey[600],),
+          ],
+        ),
+      )
+    )
     );
   }
 }

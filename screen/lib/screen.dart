@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart' ;
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 // import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 
@@ -11,11 +12,12 @@ class Screen extends StatefulWidget {
 
 class _ScreenState extends State<Screen> {
 
-  dynamic images = ["assets/note20 ultra.jpg","assets/macbook air.jpg","assets/macbook pro.jpg","assets/backlit keyboard.jpg","assets/gaming pc.jpg","assets/iphone12.jpg","assets/mercedes.jpg","assets/mutton.jpg","assets/royalfield.jpg","assets/roadster.jpg"];
-  var imagesNames = ["Note 20 Ultra", "Macbook Air", "Macbook Pro", "Backlit Keyboard", "Gaming PC", "Iphone 12", "Mercedes", "Mutton", "Royal Field", "Roadster"];
+  dynamic images = ["assets/note20 ultra.jpg","assets/macbook air.jpg","assets/macbook pro.jpg","assets/backlit keyboard.jpg","assets/gaming pc.jpg","assets/iphone12.jpg","assets/mercedes.jpg","assets/mutton.jpg","assets/royalfield.jpg","assets/roadster.jpg",'assets/wireless.jpg', 'assets/tablet.jpg', 'assets/samsung.jpg'];
+  var imagesNames = ["Note 20 Ultra", "Macbook Air", "Macbook Pro", "Backlit Keyboard", "Gaming PC", "Iphone 12", "Mercedes", "Mutton", "Royal Field", "Roadster", "Wireless", "Tab", "Samsung"];
   var items = ["Clothes", "Electronic", "Households", "Appliances", "Others",];
   var itemsQuantity = ["5 items", "20 items", "9 items", "5 items", "15 items"];
-  var itemIcons = [Icons.store, Icons.flash_auto, Icons.house, Icons.hourglass_empty_outlined, Icons.double_arrow];
+  var itemIcons = [Icons.store, Icons.flash_auto, Icons.house, Icons.microwave, Icons.double_arrow];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,12 +53,12 @@ class _ScreenState extends State<Screen> {
       child: Column(
         children: [
           Padding(
-            padding:  EdgeInsets.all(10),
+            padding:  EdgeInsets.only(top: 10, left: 10, right: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Items', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
-                Text('View More', style: TextStyle(color: Colors.purple),)
+                Text('Items', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.black),),
+                Text('View More', style: TextStyle(color: Colors.purple, fontWeight: FontWeight.w500),)
               ],
             ),
           ),
@@ -65,24 +67,50 @@ class _ScreenState extends State<Screen> {
 
           // ************ Horizontal Items List *************
           Container(
-            height: 200,
-            width: 300,
+            height: 280,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: 
-                 List.generate(images.length, (index) {
+                List.generate(images.length, (index) {
                   return Container(
-                  margin: EdgeInsets.all(10),
-                  // height: 180,
-                  width: 300,
-                  child: Image.asset(
-                    images[index], 
-                    width: MediaQuery.of(context).size.width,
-                    fit: BoxFit.cover,
+                  margin: EdgeInsets.all(25),
+                  width: 320,
+                  child: Card(
+                  elevation: 5,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:[
+                      Expanded(
+                        child: Image.asset(images[index], fit: BoxFit.cover,width: MediaQuery.of(context).size.width,),
+                      ),
+                      SizedBox(height: 5,),
+                      Text('  ${imagesNames[index]} ',style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.black),),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: 10),
+                            child: RatingBarIndicator(
+                              rating: 6,
+                              itemBuilder: (context, index) => Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                              ),
+                              itemCount: 6,
+                              itemSize: 10,
+                              direction: Axis.horizontal,
+                            ),
+                          ),
+                          Text(' 5.0 (23 Reviews)',style: TextStyle(fontSize: 10, color: Colors.black),),
+                        ],
+                      ),
+                      SizedBox(height: 5,)
+                    ],
                   ),
-                );
-              },
-            )
+                  ),
+                  );
+                },
+                )
             ),
           ),
 
@@ -96,7 +124,7 @@ class _ScreenState extends State<Screen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('More Categories \n', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black)),
+                  Text('More Categories\n', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black),),
                 ],
               ),
             ),
@@ -155,8 +183,8 @@ class _ScreenState extends State<Screen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Popular Items', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
-                Text('View More', style: TextStyle(color: Colors.purple),)
+                Text('Popular Items', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black),),
+                Text('View More', style: TextStyle(color: Colors.purple, fontWeight: FontWeight.w500),)
               ],
             ),
           ),
@@ -169,18 +197,46 @@ class _ScreenState extends State<Screen> {
           
           // **************** Vertical Items List ***************8
           Container(
-            width: 400,
+            width: 380,
             child: GridView.count(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               crossAxisCount: 2,
-              crossAxisSpacing: 20,
-              mainAxisSpacing: 20,
               children: List.generate(images.length, (index) {
                 return Container(
+                  width: 120,
                   margin: EdgeInsets.all(10),
-                  height: 200,
-                  child: Image.asset(images[index]),
+                  height: 100,
+                  child: Card(
+                  elevation: 5,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:[
+                      Expanded(
+                        child: Image.asset(images[index], fit: BoxFit.cover,width: MediaQuery.of(context).size.width,),
+                      ),
+                      SizedBox(height: 5,),
+                      Text('  ${imagesNames[index]}',style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.black),),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          RatingBarIndicator(
+                            rating: 6,
+                            itemBuilder: (context, index) => Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                            ),
+                            itemCount: 6,
+                            itemSize: 10,
+                            direction: Axis.horizontal,
+                          ),
+                          Text('5.0 (23 Reviews)',style: TextStyle(fontSize: 10, color: Colors.black),),
+                        ],
+                      ),
+                      SizedBox(height: 5,)
+                    ],
+                  ),
+                  ),
                 );
               }),
             ),

@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart' ;
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+// import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 
 class Screen extends StatefulWidget {
@@ -65,16 +65,21 @@ class _ScreenState extends State<Screen> {
 
           // ************ Horizontal Items List *************
           Container(
-            height: 220,
+            height: 200,
+            width: 300,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: 
                  List.generate(images.length, (index) {
                   return Container(
-                  margin: EdgeInsets.all(20),
-                  height: 210,
-                  width: 330,
-                  child: Image.asset(images[index]),
+                  margin: EdgeInsets.all(10),
+                  // height: 180,
+                  width: 300,
+                  child: Image.asset(
+                    images[index], 
+                    width: MediaQuery.of(context).size.width,
+                    fit: BoxFit.cover,
+                  ),
                 );
               },
             )
